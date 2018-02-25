@@ -1,0 +1,33 @@
+StackLayout {
+  padding: 30;
+  background:transparent; 
+  font-size: 20px; 
+  color: white;
+  }
+   .btn-socials{  
+  padding: 0;
+  height: 50 ; 
+  width: 100%;
+  }
+  Image { margin-bottom: 20; }  
+
+  .fb-login {
+    background-color: #201a6e;
+    color: #f5d2f7;
+     
+  }
+  .go-login {
+    background-color: #920000;
+    color: #f5d2f7; 
+  }
+  .email-login {
+    background-color: #8b108f;
+    color: #f5d2f7;
+    margin-top: 30;
+  } 
+
+  .email-signup {
+    background-color: #360038;
+    color: #f5d2f7;
+    margin-top: 10;
+  } 

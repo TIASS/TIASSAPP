@@ -1,0 +1,76 @@
+/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+@import 'nativescript-theme-core/css/core.light.css';
+
+.fa { 
+    font-family: FontAwesome, fontawesome-webfont;
+}
+
+ActionBar {
+    background-color: #bc15c2;  
+    color: #e0e0e0; 
+}
+
+.drawer-content {
+    background-color: #e0e0e0;
+    color: #240125;
+}
+
+.drawer-content .drawer-header {
+    height: 150;
+    background-color: #bc15c2;
+    margin-bottom: 7;
+}
+
+.drawer-content .drawer-links .drawer-link {
+    font-size: 15;
+    padding: 15;
+}
+
+.drawer-content .drawer-links .drawer-link .fa {
+    font-size: 20;
+    margin-right: 10;
+}
+
+.drawer-content .drawer-links .drawer-link .text {
+    margin-left: 30;
+}
+
+.drawer-content .drawer-links .current {
+    background-color: #bc15c2;
+}
+
+.drawer-content .drawer-separator {
+    height: 1;
+    background-color: #e68ee9;
+    margin: 7 0;
+}
+ 
+ 
+
+@keyframes glow {
+    0% {
+        background-color: #eeeeee;
+    }
+    50% {
+        background-color: #b7b7b7;
+    }
+    100% {
+        background-color: #eeeeee;
+    }
+}
+
+.anim {
+    animation-name: glow;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}

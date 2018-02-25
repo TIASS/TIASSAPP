@@ -1,0 +1,17 @@
+<ActionBar title="Tiass">
+    <NavigationButton text="Tiass" icon="res://ic_menu" (tap)="openDrawer()"></NavigationButton>
+    <profil-user-top [user]="user"></profil-user-top>
+    <ActionItem icon="res://ic_more_horiz_white_24dp" ios.position="right" horizontalAlignment="right" verticalAlignment="center"></ActionItem>
+</ActionBar>
+<RadSideDrawer #drawerComponent tkToggleNavButton showOverNavigation="true">
+    <ScrollView tkDrawerContent class="drawer-content">
+        <StackLayout horizontalAlign="left">
+            <profil-user-left [user]="user"></profil-user-left>
+            <drawer-content></drawer-content>
+        </StackLayout>
+    </ScrollView>
+    <StackLayout tkMainContent padding="40">
+        <Label text="Home page of the application"></Label>
+        <Label class="text" [text]="user.name"></Label> 
+    </StackLayout>
+</RadSideDrawer>

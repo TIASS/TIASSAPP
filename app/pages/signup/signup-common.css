@@ -1,0 +1,23 @@
+StackLayout { 
+    background:transparent; 
+    font-size: 20px; 
+    color: white;
+} 
+Image { margin-bottom: 20; }  
+Button, TextField, CheckBox {
+    margin-left: 16;
+    margin-right: 16;
+    margin-bottom: 10;
+} 
+.submit-button {
+    background-color: #8b108f;
+    color: #f5d2f7;
+    margin-top: 20;
+  }
+.back-to-button {
+background-color: transparent;
+color: #f5d2f7;
+margin-top: 20;
+}
+
+  

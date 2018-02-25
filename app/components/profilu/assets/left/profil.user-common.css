@@ -1,0 +1,17 @@
+StackLayout {
+    height: 150;
+    padding: 15;
+    background-color: #bc15c2;
+    color:  #fdceff;
+    margin: 0 0 10 0; 
+    font-size: 20px;
+    text-align: center
+}
+StackLayout .fa, StackLayout Label.fa{
+    color:  #fdceff; 
+    font-size: 50px;
+}
+Image {
+    margin-top: 5;
+    margin-bottom: 20;
+}

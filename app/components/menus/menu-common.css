@@ -1,0 +1,35 @@
+
+StackLayout {
+  background-color: #eeeeee;
+  color: #240125;
+}
+
+.drawer-content .drawer-header {
+  height: 150;
+  background-color: #bc15c2;
+  margin-bottom: 7;
+}
+
+StackLayout.drawer-links .drawer-link {
+  font-size: 15;
+  padding: 15;
+}
+
+StackLayout.drawer-links .drawer-link .fa {
+  font-size: 20;
+  margin-right: 10;
+}
+
+StackLayout.drawer-links .drawer-link .text {
+  margin-left: 30;
+}
+
+StackLayout.drawer-links .current {
+  background-color: #bc15c2;
+}
+
+StackLayout .drawer-separator {
+  height: 1;
+  background-color: #e68ee9;
+  margin: 7 0;
+}

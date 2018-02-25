@@ -1,0 +1,103 @@
+"use strict";
+//import { android , ios} from "tns-core-modules/application";
+//import { android , ios  } from "tns-core-modules/application";
+Object.defineProperty(exports, "__esModule", { value: true });
+var app = require("tns-core-modules/application");
+var permissions = require("nativescript-permissions");
+/*
+permissions.requestPermission(android.Manifest.permission.READ_CONTACTS, "I need these permissions because I'm cool")
+ .then(function() {
+    console.log("Woo Hoo, I have the power!");
+ })
+ .catch(function() {
+    console.log("Uh oh, no permissions - plan B time!");
+ });
+ */
+function hasPermission(KEY) {
+    permissions.hasPermission(KEY);
+}
+exports.hasPermission = hasPermission;
+function getWifiInfos(callback, failed) {
+    var has = this.hasPermission(app.android.context.permissions.ACCESS_NETWORK_STATE);
+    alert("getWifiInfos has : " + has);
+    if (has)
+        callback(this.getWifiInfos_impl());
+    else
+        permissions.requestPermission(app.android.context.permissions.ACCESS_NETWORK_STATE, "I need these permissions because I'm cool")
+            .then(function () {
+            alert("Woo Hoo, I have the power!");
+            callback(this.getWifiInfos_impl());
+        })
+            .catch(function () {
+            failed();
+            alert("Uh oh, no permissions - plan B time!");
+        });
+}
+exports.getWifiInfos = getWifiInfos;
+function getWifiInfos_impl() {
+    var context = app.android.context;
+    var wifiManager = app.android.context.getSystemService(context.WIFI_SERVICE);
+    var wInfo = wifiManager.getConnectionInfo();
+    var ip = wInfo.getIpAddress();
+    console.dir(wInfo);
+    console.log("ip : " + ip);
+    console.log("ip : ", ip);
+    alert(JSON.stringify(wInfo));
+    return wInfo;
+}
+/*
+var connectionType = connectivity.getConnectionType();
+switch (connectionType) {
+    case connectivity.connectionType.none:
+        console.log("No connection");
+        break;
+    case connectivity.connectionType.wifi:
+        console.log("WiFi connection");
+        break;
+    case connectivity.connectionType.mobile:
+        console.log("Mobile connection");
+        break;
+}
+
+connectivity.startMonitoring(function onConnectionTypeChanged(newConnectionType: number) {
+    switch (newConnectionType) {
+        case connectivity.connectionType.none:
+            console.log("Connection type changed to none.");
+            break;
+        case connectivity.connectionType.wifi:
+            console.log("Connection type changed to WiFi.");
+            break;
+        case connectivity.connectionType.mobile:
+            console.log("Connection type changed to mobile.");
+            break;
+    }
+});*/
+//connectivity.stopMonitoring();
+/*
+An uncaught Exception occurred on "main" thread.
+java.lang.RuntimeException: Unable to create application com.tns.NativeScriptApplication: com.tns.NativeScriptException:
+
+Error calling module function
+
+Error calling module function
+
+Error calling module function
+
+Error calling module function
+
+Error calling module function
+
+Error calling module function
+
+Error: java.lang.SecurityException: ConnectivityService: Neither user 10055 nor current process has android.permission.ACCESS_NETWORK_STATE.
+    android.os.Parcel.readException(Parcel.java:1431)
+    android.os.Parcel.readException(Parcel.java:1385)
+    android.net.IConnectivityManager$Stub$Proxy.getActiveNetworkInfo(IConnectivityManager.java:720)
+    android.net.ConnectivityManager.getActiveNetworkInfo(ConnectivityManager.java:522)
+    com.tns.Runtime.runModule(Native Method)
+    com.tns.Runtime.runModule(Runtime.java:530)
+    com.tns.Runtime.run(Runtime.java:522)
+    com.tns.NativeScriptApplication.onCreate(NativeScriptApplication.java:19)
+    androi
+*/ 
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGxhdGVmb3JtLmluZm9zLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGxhdGVmb3JtLmluZm9zLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSw4REFBOEQ7QUFDOUQsZ0VBQWdFOztBQUVoRSxrREFBb0Q7QUFHcEQsc0RBQXdEO0FBQ3hEOzs7Ozs7OztHQVFHO0FBQ0gsdUJBQThCLEdBQUc7SUFDN0IsV0FBVyxDQUFDLGFBQWEsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUNuQyxDQUFDO0FBRkQsc0NBRUM7QUFHRCxzQkFBNkIsUUFBbUIsRUFBRSxNQUFpQjtJQUMvRCxJQUFJLEdBQUcsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO0lBQ25GLEtBQUssQ0FBQyxxQkFBcUIsR0FBQyxHQUFHLENBQUMsQ0FBQztJQUNqQyxFQUFFLENBQUMsQ0FBQyxHQUFHLENBQUM7UUFDUixRQUFRLENBQUMsSUFBSSxDQUFDLGlCQUFpQixFQUFFLENBQUMsQ0FBQztJQUVuQyxJQUFJO1FBQ0EsV0FBVyxDQUFDLGlCQUFpQixDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxvQkFBb0IsRUFBRSwyQ0FBMkMsQ0FBQzthQUMzSCxJQUFJLENBQUM7WUFDRixLQUFLLENBQUMsNEJBQTRCLENBQUMsQ0FBQztZQUNwQyxRQUFRLENBQUMsSUFBSSxDQUFDLGlCQUFpQixFQUFFLENBQUMsQ0FBQztRQUN2QyxDQUFDLENBQUM7YUFDRCxLQUFLLENBQUM7WUFDSCxNQUFNLEVBQUcsQ0FBQztZQUNWLEtBQUssQ0FBQyxzQ0FBc0MsQ0FBQyxDQUFDO1FBQ2xELENBQUMsQ0FBQyxDQUFDO0FBQ2YsQ0FBQztBQWhCRCxvQ0FnQkM7QUFFRDtJQUNJLElBQUksT0FBTyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO0lBQ2xDLElBQUksV0FBVyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyxZQUFZLENBQUMsQ0FBQztJQUM3RSxJQUFJLEtBQUssR0FBRyxXQUFXLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztJQUM1QyxJQUFJLEVBQUUsR0FBRyxLQUFLLENBQUMsWUFBWSxFQUFFLENBQUM7SUFDOUIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNuQixPQUFPLENBQUMsR0FBRyxDQUFDLE9BQU8sR0FBRyxFQUFFLENBQUMsQ0FBQztJQUMxQixPQUFPLENBQUMsR0FBRyxDQUFDLE9BQU8sRUFBRSxFQUFFLENBQUMsQ0FBQztJQUN6QixLQUFLLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQzdCLE1BQU0sQ0FBQyxLQUFLLENBQUM7QUFDakIsQ0FBQztBQUNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQTBCSztBQUNMLGdDQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7RUEwQkUiLCJzb3VyY2VzQ29udGVudCI6WyIvL2ltcG9ydCB7IGFuZHJvaWQgLCBpb3N9IGZyb20gXCJ0bnMtY29yZS1tb2R1bGVzL2FwcGxpY2F0aW9uXCI7XG4vL2ltcG9ydCB7IGFuZHJvaWQgLCBpb3MgIH0gZnJvbSBcInRucy1jb3JlLW1vZHVsZXMvYXBwbGljYXRpb25cIjtcbiBcbmltcG9ydCAqIGFzIGFwcCBmcm9tIFwidG5zLWNvcmUtbW9kdWxlcy9hcHBsaWNhdGlvblwiO1xuaW1wb3J0ICogYXMgcGxhdGZvcm0gZnJvbSBcInRucy1jb3JlLW1vZHVsZXMvcGxhdGZvcm1cIjtcbmltcG9ydCAqIGFzIGNvbm5lY3Rpdml0eSBmcm9tIFwidG5zLWNvcmUtbW9kdWxlcy9jb25uZWN0aXZpdHlcIjtcbmltcG9ydCAqIGFzIHBlcm1pc3Npb25zIGZyb20gXCJuYXRpdmVzY3JpcHQtcGVybWlzc2lvbnNcIjtcbi8qXG5wZXJtaXNzaW9ucy5yZXF1ZXN0UGVybWlzc2lvbihhbmRyb2lkLk1hbmlmZXN0LnBlcm1pc3Npb24uUkVBRF9DT05UQUNUUywgXCJJIG5lZWQgdGhlc2UgcGVybWlzc2lvbnMgYmVjYXVzZSBJJ20gY29vbFwiKVxuIC50aGVuKGZ1bmN0aW9uKCkge1xuICAgIGNvbnNvbGUubG9nKFwiV29vIEhvbywgSSBoYXZlIHRoZSBwb3dlciFcIik7XG4gfSlcbiAuY2F0Y2goZnVuY3Rpb24oKSB7XG4gICAgY29uc29sZS5sb2coXCJVaCBvaCwgbm8gcGVybWlzc2lvbnMgLSBwbGFuIEIgdGltZSFcIik7XG4gfSk7XG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBoYXNQZXJtaXNzaW9uKEtFWSkge1xuICAgIHBlcm1pc3Npb25zLmhhc1Blcm1pc3Npb24oS0VZKTtcbn1cblxuXG5leHBvcnQgZnVuY3Rpb24gZ2V0V2lmaUluZm9zKGNhbGxiYWNrIDogRnVuY3Rpb24sIGZhaWxlZCA6IEZ1bmN0aW9uKSB7XG4gICAgbGV0IGhhcyA9IHRoaXMuaGFzUGVybWlzc2lvbihhcHAuYW5kcm9pZC5jb250ZXh0LnBlcm1pc3Npb25zLkFDQ0VTU19ORVRXT1JLX1NUQVRFKTtcbiAgICBhbGVydChcImdldFdpZmlJbmZvcyBoYXMgOiBcIitoYXMpO1xuICAgIGlmIChoYXMpXG4gICAgY2FsbGJhY2sodGhpcy5nZXRXaWZpSW5mb3NfaW1wbCgpKTtcbiAgICAgLy8gICByZXR1cm4gdGhpcy5nZXRXaWZpSW5mb3NfaW1wbCgpO1xuICAgIGVsc2VcbiAgICAgICAgcGVybWlzc2lvbnMucmVxdWVzdFBlcm1pc3Npb24oYXBwLmFuZHJvaWQuY29udGV4dC5wZXJtaXNzaW9ucy5BQ0NFU1NfTkVUV09SS19TVEFURSwgXCJJIG5lZWQgdGhlc2UgcGVybWlzc2lvbnMgYmVjYXVzZSBJJ20gY29vbFwiKVxuICAgICAgICAgICAgLnRoZW4oZnVuY3Rpb24gKCkge1xuICAgICAgICAgICAgICAgIGFsZXJ0KFwiV29vIEhvbywgSSBoYXZlIHRoZSBwb3dlciFcIik7XG4gICAgICAgICAgICAgICAgY2FsbGJhY2sodGhpcy5nZXRXaWZpSW5mb3NfaW1wbCgpKTtcbiAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAuY2F0Y2goZnVuY3Rpb24gKCkge1xuICAgICAgICAgICAgICAgIGZhaWxlZCggKTtcbiAgICAgICAgICAgICAgICBhbGVydChcIlVoIG9oLCBubyBwZXJtaXNzaW9ucyAtIHBsYW4gQiB0aW1lIVwiKTtcbiAgICAgICAgICAgIH0pO1xufVxuXG5mdW5jdGlvbiBnZXRXaWZpSW5mb3NfaW1wbCgpIHtcbiAgICB2YXIgY29udGV4dCA9IGFwcC5hbmRyb2lkLmNvbnRleHQ7XG4gICAgdmFyIHdpZmlNYW5hZ2VyID0gYXBwLmFuZHJvaWQuY29udGV4dC5nZXRTeXN0ZW1TZXJ2aWNlKGNvbnRleHQuV0lGSV9TRVJWSUNFKTtcbiAgICB2YXIgd0luZm8gPSB3aWZpTWFuYWdlci5nZXRDb25uZWN0aW9uSW5mbygpO1xuICAgIHZhciBpcCA9IHdJbmZvLmdldElwQWRkcmVzcygpO1xuICAgIGNvbnNvbGUuZGlyKHdJbmZvKTtcbiAgICBjb25zb2xlLmxvZyhcImlwIDogXCIgKyBpcCk7XG4gICAgY29uc29sZS5sb2coXCJpcCA6IFwiLCBpcCk7XG4gICAgYWxlcnQoSlNPTi5zdHJpbmdpZnkod0luZm8pKTtcbiAgICByZXR1cm4gd0luZm87XG59IFxuLypcbnZhciBjb25uZWN0aW9uVHlwZSA9IGNvbm5lY3Rpdml0eS5nZXRDb25uZWN0aW9uVHlwZSgpO1xuc3dpdGNoIChjb25uZWN0aW9uVHlwZSkge1xuICAgIGNhc2UgY29ubmVjdGl2aXR5LmNvbm5lY3Rpb25UeXBlLm5vbmU6XG4gICAgICAgIGNvbnNvbGUubG9nKFwiTm8gY29ubmVjdGlvblwiKTtcbiAgICAgICAgYnJlYWs7XG4gICAgY2FzZSBjb25uZWN0aXZpdHkuY29ubmVjdGlvblR5cGUud2lmaTpcbiAgICAgICAgY29uc29sZS5sb2coXCJXaUZpIGNvbm5lY3Rpb25cIik7XG4gICAgICAgIGJyZWFrO1xuICAgIGNhc2UgY29ubmVjdGl2aXR5LmNvbm5lY3Rpb25UeXBlLm1vYmlsZTpcbiAgICAgICAgY29uc29sZS5sb2coXCJNb2JpbGUgY29ubmVjdGlvblwiKTtcbiAgICAgICAgYnJlYWs7XG59XG5cbmNvbm5lY3Rpdml0eS5zdGFydE1vbml0b3JpbmcoZnVuY3Rpb24gb25Db25uZWN0aW9uVHlwZUNoYW5nZWQobmV3Q29ubmVjdGlvblR5cGU6IG51bWJlcikge1xuICAgIHN3aXRjaCAobmV3Q29ubmVjdGlvblR5cGUpIHtcbiAgICAgICAgY2FzZSBjb25uZWN0aXZpdHkuY29ubmVjdGlvblR5cGUubm9uZTpcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwiQ29ubmVjdGlvbiB0eXBlIGNoYW5nZWQgdG8gbm9uZS5cIik7XG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgY2FzZSBjb25uZWN0aXZpdHkuY29ubmVjdGlvblR5cGUud2lmaTpcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwiQ29ubmVjdGlvbiB0eXBlIGNoYW5nZWQgdG8gV2lGaS5cIik7XG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgY2FzZSBjb25uZWN0aXZpdHkuY29ubmVjdGlvblR5cGUubW9iaWxlOlxuICAgICAgICAgICAgY29uc29sZS5sb2coXCJDb25uZWN0aW9uIHR5cGUgY2hhbmdlZCB0byBtb2JpbGUuXCIpO1xuICAgICAgICAgICAgYnJlYWs7XG4gICAgfVxufSk7Ki9cbi8vY29ubmVjdGl2aXR5LnN0b3BNb25pdG9yaW5nKCk7XG5cbi8qXG5BbiB1bmNhdWdodCBFeGNlcHRpb24gb2NjdXJyZWQgb24gXCJtYWluXCIgdGhyZWFkLlxuamF2YS5sYW5nLlJ1bnRpbWVFeGNlcHRpb246IFVuYWJsZSB0byBjcmVhdGUgYXBwbGljYXRpb24gY29tLnRucy5OYXRpdmVTY3JpcHRBcHBsaWNhdGlvbjogY29tLnRucy5OYXRpdmVTY3JpcHRFeGNlcHRpb246IFxuXG5FcnJvciBjYWxsaW5nIG1vZHVsZSBmdW5jdGlvbiBcblxuRXJyb3IgY2FsbGluZyBtb2R1bGUgZnVuY3Rpb24gXG5cbkVycm9yIGNhbGxpbmcgbW9kdWxlIGZ1bmN0aW9uIFxuXG5FcnJvciBjYWxsaW5nIG1vZHVsZSBmdW5jdGlvbiBcblxuRXJyb3IgY2FsbGluZyBtb2R1bGUgZnVuY3Rpb24gXG5cbkVycm9yIGNhbGxpbmcgbW9kdWxlIGZ1bmN0aW9uIFxuXG5FcnJvcjogamF2YS5sYW5nLlNlY3VyaXR5RXhjZXB0aW9uOiBDb25uZWN0aXZpdHlTZXJ2aWNlOiBOZWl0aGVyIHVzZXIgMTAwNTUgbm9yIGN1cnJlbnQgcHJvY2VzcyBoYXMgYW5kcm9pZC5wZXJtaXNzaW9uLkFDQ0VTU19ORVRXT1JLX1NUQVRFLlxuICAgIGFuZHJvaWQub3MuUGFyY2VsLnJlYWRFeGNlcHRpb24oUGFyY2VsLmphdmE6MTQzMSlcbiAgICBhbmRyb2lkLm9zLlBhcmNlbC5yZWFkRXhjZXB0aW9uKFBhcmNlbC5qYXZhOjEzODUpXG4gICAgYW5kcm9pZC5uZXQuSUNvbm5lY3Rpdml0eU1hbmFnZXIkU3R1YiRQcm94eS5nZXRBY3RpdmVOZXR3b3JrSW5mbyhJQ29ubmVjdGl2aXR5TWFuYWdlci5qYXZhOjcyMClcbiAgICBhbmRyb2lkLm5ldC5Db25uZWN0aXZpdHlNYW5hZ2VyLmdldEFjdGl2ZU5ldHdvcmtJbmZvKENvbm5lY3Rpdml0eU1hbmFnZXIuamF2YTo1MjIpXG4gICAgY29tLnRucy5SdW50aW1lLnJ1bk1vZHVsZShOYXRpdmUgTWV0aG9kKVxuICAgIGNvbS50bnMuUnVudGltZS5ydW5Nb2R1bGUoUnVudGltZS5qYXZhOjUzMClcbiAgICBjb20udG5zLlJ1bnRpbWUucnVuKFJ1bnRpbWUuamF2YTo1MjIpXG4gICAgY29tLnRucy5OYXRpdmVTY3JpcHRBcHBsaWNhdGlvbi5vbkNyZWF0ZShOYXRpdmVTY3JpcHRBcHBsaWNhdGlvbi5qYXZhOjE5KVxuICAgIGFuZHJvaVxuKi8iXX0=

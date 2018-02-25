@@ -1,0 +1,30 @@
+<ActionBar title="" visibility="{{ authState == 2 ? 'visible' : 'collapsed' }}">
+    <NavigationButton text="Back" icon="res://ic_back" (tap)="goback()"></NavigationButton>
+</ActionBar>
+<ScrollView sdkExampleTitle sdkToggleNavButton>
+    <StackLayout>
+        <Image src="res://logo_login" stretch="none" horizontalAlignment="center"></Image>
+
+        <StackLayout #containerAuth0 visibility="{{ authState == 0 ? 'visible' : 'collapsed' }}">
+            <Label text="Tiass" horizontalAlignment="center" textWrap="true"></Label>
+            <Progress [value]="progress" max="100" title="TIASS" visibility="{{ progress > -1 ? 'visible' : 'collapsed' }}"></Progress>
+        </StackLayout>
+
+        <StackLayout #containerAuth1 visibility="{{ authState == 1 ? 'visible' : 'collapsed' }}">
+            <StackLayout class="btn-socials" orientation="horizontal">
+                <Button [text]="'FaceBook'" class="fb-login" horizontalAlignment="stretch" width="50%"></Button>
+                <Button [text]="'Google +'" class="go-login" horizontalAlignment="stretch" width="50%"></Button>
+            </StackLayout>
+            <Button [text]="'Email Login'" class="email-login" (tap)="enAuthState2()"></Button>
+            <Button [text]="'Create an account'" class="email-signup" (tap)="displaySignup()"></Button>
+        </StackLayout>
+
+        <StackLayout #containerAuth2 visibility="{{ authState == 2 ? 'visible' : 'collapsed' }}">
+            <TextField hint="Email Address" keyboardType="email" [(ngModel)]="loginData.email" autocorrect="false" autocapitalizationType="none"></TextField>
+            <TextField hint="Password" secure="true" [(ngModel)]="loginData.pswrd"></TextField>
+            <Button [text]="'Login'" class="submit-button" (tap)="login()"></Button>
+            <Button [text]="'Create an account'" class="email-signup" (tap)="displaySignup()"></Button>
+        </StackLayout>
+
+    </StackLayout> 
+</ScrollView>

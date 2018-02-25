@@ -1,0 +1,36 @@
+<ActionBar title="">
+  <NavigationButton text="Back" icon="res://ic_back" (tap)="goBack()"></NavigationButton>
+</ActionBar>
+<ScrollView sdkExampleTitle sdkToggleNavButton>
+  <StackLayout class="p-10" #container>
+    <Image src="res://logo_login" stretch="none" horizontalAlignment="center"></Image>
+
+    <TextField hint="Email Address" keyboardType="email" [(ngModel)]="signinData.email" autocorrect="false" autocapitalizationType="none"></TextField>
+    <TextField hint="Password" secure="true" [(ngModel)]="signinData.pswrd"></TextField>
+    <TextField class="m-b-24" hint="Name" [(ngModel)]="signinData.name" autocorrect="true"></TextField>
+ 
+    <CheckBox *ngFor="let item of gender.items"
+          #elem 
+          [checked]="item.selected" 
+          [text]="item.text"
+          (checkedChange)="elem.checked !== item.selected && gender.changeCheckedRadio(item)" 
+          fillColor="#fff" 
+          boxType="circle"></CheckBox>
+          
+    <CheckBox class="m-24" fillColor="white" #barbeshoper text="I Have a Shop" checked="false"></CheckBox>
+
+
+    <!-- 
+    <ListView [items]="errors" (tap)="dismissErros($event)" class="list-group">
+      <ng-template let-country="item" let-i="index" let-odd="odd" let-even="even">
+        <GridLayout class="list-group-item">
+          <Label [text]="item"></Label>
+        </GridLayout>
+      </ng-template>
+    </ListView>
+    -->
+    <Button [text]="'Sign up'" class="submit-button" (tap)="submit()"></Button>
+    <Button [text]="'Back to login'" class="back-to-button" (tap)="goBack()"></Button>
+  </StackLayout>
+
+</ScrollView>
